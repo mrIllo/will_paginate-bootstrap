@@ -1,14 +1,14 @@
-require "sinatra"
-require "will_paginate-bootstrap"
-require "will_paginate/collection"
+require 'sinatra'
+require 'will_paginate-bootstrap'
+require 'will_paginate/collection'
 
-CDN_PATH = "//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"
+CDN_PATH = '//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css'
 
 $template = <<EOHTML
 <html>
 <head>
 <title>will_paginate-boostrap Example App</title>
-<link href="<%= CDN_PATH %>" rel="stylesheet">
+<link href='<%= CDN_PATH %>' rel='stylesheet'>
 </head>
 <body>
 <%= will_paginate @collection, renderer: BootstrapPagination::Sinatra %>
@@ -17,16 +17,11 @@ $template = <<EOHTML
 EOHTML
 
 def build_collection
-  page = if params[:page].to_i > 0
-    params[:page].to_i
-  else
-    1
-  end
-
-  @collection = WillPaginate::Collection.new page, 10, 100000
+  page = params[:page].to_i > 0 ? params[:page].to_i : 1
+  @collection = WillPaginate::Collection.new page, 10, 100_000
 end
 
-get "/" do
+get '/' do
   build_collection
   erb $template
 end
