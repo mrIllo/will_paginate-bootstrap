@@ -19,33 +19,31 @@ module BootstrapPagination
     end
 
     def container_attributes
-      super.except(*[:link_options])
+      super.except(*[:link_options]) # class: 'page-link'
     end
 
     protected
 
-    def page_number(page)
+    def page_number(i)
       link_options = @options[:link_options] || {}
-
-      if page == current_page
-        tag('li', tag('span', page), class: 'active')
+      if i == current_page
+        tag('li', tag('span', i, class: 'page-link'), class: 'page-item active')
       else
-        tag('li', link(page, page, link_options.merge(rel: "#{rel_value(page)} nofollow")))
+        tag('li', link(i, i, link_options.merge(rel: "#{rel_value(i)} nofollow")))
       end
     end
 
-    def previous_or_next_page(page, text, classname)
+    def previous_or_next_page(i, text, klass)
       link_options = @options[:link_options] || {}
-
-      if page
-        tag('li', link(text, page, link_options.merge(rel: 'nofollow')), class: classname)
+      if i
+        tag('li', link(text, i, link_options.merge(rel: 'nofollow')), class: klass)
       else
-        tag('li', tag('span', text), class: '%s disabled' % classname)
+        tag('li', tag('span', text), class: format('%s disabled', klass))
       end
     end
 
     def gap
-      tag('li', tag('span', ELLIPSIS), class: 'disabled')
+      tag('li', tag('span', ELLIPSIS), class: 'disabled page-item')
     end
 
     def previous_page

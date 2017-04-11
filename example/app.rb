@@ -2,7 +2,7 @@ require 'sinatra'
 require 'will_paginate-bootstrap'
 require 'will_paginate/collection'
 
-CDN_PATH = '//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css'
+CDN_PATH = '//netdna.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'
 
 $template = <<EOHTML
 <html>
@@ -11,7 +11,10 @@ $template = <<EOHTML
 <link href='<%= CDN_PATH %>' rel='stylesheet'>
 </head>
 <body>
-<%= will_paginate @collection, renderer: BootstrapPagination::Sinatra %>
+<%= will_paginate @collection, renderer: BootstrapPagination::Rails,
+                        link_options: { class: 'page-link' },
+                        next_label: '&raquo;'.html_safe,
+                        previous_label: '&laquo;'.html_safe %>
 </body>
 </html>
 EOHTML

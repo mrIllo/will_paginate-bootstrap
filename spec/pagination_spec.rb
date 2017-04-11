@@ -10,9 +10,8 @@ include WillPaginate::ViewHelpers
 class MockRenderer < WillPaginate::ViewHelpers::LinkRenderer
   include BootstrapPagination::BootstrapRenderer
 
-  HASH = '#'
-
-  def url(args)
+  HASH = '#'.freeze
+  def url(_)
     HASH
   end
 end
@@ -29,7 +28,7 @@ describe "Bootstrap Renderer" do
 
   let(:output) do
     will_paginate(
-      collection.paginate(:page => page, :per_page => 1),
+      collection.paginate(page: page, per_page: 1),
       renderer: MockRenderer, link_options: link_options,
       class: class_opt
     )
