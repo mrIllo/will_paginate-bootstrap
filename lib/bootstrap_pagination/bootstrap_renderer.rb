@@ -43,7 +43,7 @@ module BootstrapPagination
     end
 
     def gap
-      tag('li', tag('span', ELLIPSIS), class: 'disabled page-item')
+      tag('li', tag('a', ELLIPSIS, class: 'page-link'), class: 'page-item disabled')
     end
 
     def previous_page
