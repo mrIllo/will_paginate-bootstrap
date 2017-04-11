@@ -38,7 +38,7 @@ module BootstrapPagination
       if i
         tag('li', link(text, i, link_options.merge(rel: 'nofollow')), class: klass)
       else
-        tag('li', tag('span', text), class: format('%s disabled', klass))
+        tag('li', tag('span', text, class: 'page-link'), class: format('%s disabled', klass))
       end
     end
 
@@ -48,12 +48,12 @@ module BootstrapPagination
 
     def previous_page
       num = @collection.current_page > 1 && @collection.current_page - 1
-      previous_or_next_page(num, @options[:previous_label], 'prev')
+      previous_or_next_page(num, @options[:previous_label], 'page-item')
     end
 
     def next_page
       num = @collection.current_page < @collection.total_pages && @collection.current_page + 1
-      previous_or_next_page(num, @options[:next_label], 'next')
+      previous_or_next_page(num, @options[:next_label], 'page-item')
     end
 
     def ul_class
