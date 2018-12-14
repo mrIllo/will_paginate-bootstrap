@@ -1,1 +1,1 @@
-require 'will_paginate/bootstrap'
+require_relative './will_paginate/bootstrap'

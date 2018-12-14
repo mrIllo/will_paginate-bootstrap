@@ -1,4 +1,4 @@
-require 'bootstrap_pagination/version'
+require_relative '../bootstrap_pagination/version'
 
 module BootstrapPagination
   #
@@ -29,7 +29,7 @@ module BootstrapPagination
       if i == current_page
         tag('li', tag('span', i, class: 'page-link'), class: 'page-item active')
       else
-        tag('li', link(i, i, link_options.merge(rel: "#{rel_value(i)} nofollow")))
+        tag('li', link(i, i, link_options.merge(rel: "#{rel_value(i)} nofollow")), class: 'page-item')
       end
     end
 
@@ -57,7 +57,7 @@ module BootstrapPagination
     end
 
     def ul_class
-      ['pagination', @options[:class]].compact.join(' ')
+      ['pagination', @options[:class]].compact.uniq.join(' ')
     end
   end
 end
